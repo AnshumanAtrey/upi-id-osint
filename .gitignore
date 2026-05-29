@@ -1,0 +1,7 @@
+Plans.md
+RESEARCH.md
+DEMO_COMMAND.txt
+__pycache__/
+*.pyc
+storage/
+.env

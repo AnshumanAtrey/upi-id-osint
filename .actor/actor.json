@@ -1,0 +1,41 @@
+{
+    "actorSpecification": 1,
+    "name": "upi-id-osint",
+    "title": "UPI ID OSINT - Phone to UPI VPAs + Bank Names (India)",
+    "description": "Direct UPI OSINT for India. Phone or VPA → all active UPI IDs across PhonePe, Paytm, BHIM, GPay, Amazon Pay etc. + full bank-registered name from NPCI. Bulk mode supported. Razorpay frontend + PayU validateVPA. No scraping, no guessing.",
+    "version": "0.3",
+    "_changelog": "0.3.2 - scrub real phone number from prefill + docs",
+    "buildTag": "latest",
+    "meta": {
+        "templateId": "python-start"
+    },
+    "input": "./INPUT_SCHEMA.json",
+    "output": "./output_schema.json",
+    "dockerfile": "../Dockerfile",
+    "storages": {
+        "dataset": {
+            "actorSpecification": 1,
+            "title": "UPI OSINT dossiers",
+            "views": {
+                "overview": {
+                    "title": "Overview",
+                    "transformation": {
+                        "fields": ["input_phone", "input_vpa", "primary_name", "confidence", "vpa_count", "psp_primary", "phone_valid"]
+                    },
+                    "display": {
+                        "component": "table",
+                        "properties": {
+                            "input_phone": {"label": "Phone"},
+                            "input_vpa": {"label": "VPA"},
+                            "primary_name": {"label": "Name (NPCI)"},
+                            "confidence": {"label": "Confidence"},
+                            "vpa_count": {"label": "Active VPAs"},
+                            "psp_primary": {"label": "Primary PSP"},
+                            "phone_valid": {"label": "Phone valid"}
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "actorOutputSchemaVersion": 1,
+    "title": "UPI ID OSINT output",
+    "description": "One dataset record per target (phone or VPA). Each record is a full forensic dossier: identity match, all discovered VPAs with raw API responses, bank/PSP inference, app usage profile, multi-source confidence score, plus warnings and errors for full audit trail.",
+    "properties": {
+        "dataset": {
+            "type": "string",
+            "title": "Dataset",
+            "description": "Default dataset containing one dossier per input target.",
+            "template": "{{links.publicRunUrl}}/dataset"
+        },
+        "log": {
+            "type": "string",
+            "title": "Log",
+            "description": "Full run log including per-target timings and any rate-limit/auth events.",
+            "template": "{{links.publicRunUrl}}/log"
+        }
+    }
+}

@@ -1,0 +1,9 @@
+.git
+.venv
+__pycache__
+*.pyc
+.DS_Store
+upi_osint.py
+test_unit.py
+Plans.md
+RESEARCH.md

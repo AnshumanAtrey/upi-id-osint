@@ -1,0 +1,69 @@
+{
+    "title": "UPI ID OSINT input",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "phone": {
+            "title": "Phone number (single)",
+            "type": "string",
+            "description": "One Indian mobile in E.164 format. Examples: +91XXXXXXXXXX, +919876543210. Either `phone`, `vpa`, `phones[]`, or `vpas[]` must be provided.",
+            "editor": "textfield",
+            "prefill": "+91XXXXXXXXXX",
+            "sectionCaption": "Targets - choose any combination"
+        },
+        "vpa": {
+            "title": "VPA (single - direct lookup of a known UPI ID)",
+            "type": "string",
+            "description": "A specific UPI VPA you already know (e.g. `anshumanatrey@okhdfcbank`). Use when enumeration cannot guess the username portion.",
+            "editor": "textfield"
+        },
+        "phones": {
+            "title": "Phone numbers (bulk array)",
+            "type": "array",
+            "description": "Multiple Indian mobiles. Each is processed independently and produces one dataset record.",
+            "editor": "stringList",
+            "items": {"type": "string"},
+            "default": []
+        },
+        "vpas": {
+            "title": "VPAs (bulk array - direct lookups)",
+            "type": "array",
+            "description": "Multiple known VPAs to look up directly. Each is processed independently and produces one dataset record.",
+            "editor": "stringList",
+            "items": {"type": "string"},
+            "default": []
+        },
+        "depth": {
+            "title": "Enumeration depth (only used when phone or phones[] is provided)",
+            "type": "string",
+            "description": "tier1 (13 most common handles, ~70% coverage) | tier2 (20 handles, ~85%) | exhaustive (all 35 known handles, ~97%).",
+            "editor": "select",
+            "enum": ["tier1", "tier2", "exhaustive"],
+            "enumTitles": ["Tier 1 - 13 handles (recommended)", "Tier 2 - 20 handles", "Exhaustive - all 35 handles"],
+            "default": "tier1"
+        },
+        "razorpayKeyId": {
+            "title": "Razorpay live key_id (only the key_id, NO secret)",
+            "type": "string",
+            "description": "Razorpay live key_id for free phone→VPA enumeration. Public-safe (designed to live in frontend code). Without it, enumeration phase is skipped.",
+            "editor": "textfield",
+            "isSecret": true,
+            "sectionCaption": "Credentials"
+        },
+        "payuKey": {
+            "title": "PayU merchant key",
+            "type": "string",
+            "description": "PayU production merchant key. Used with `payuSalt` to resolve each active VPA to its full bank-registered name via PayU validateVPA (~₹1-3 per call).",
+            "editor": "textfield",
+            "isSecret": true
+        },
+        "payuSalt": {
+            "title": "PayU merchant salt",
+            "type": "string",
+            "description": "PayU production salt paired with the merchant key for SHA512 hash signing.",
+            "editor": "textfield",
+            "isSecret": true
+        }
+    },
+    "required": []
+}
